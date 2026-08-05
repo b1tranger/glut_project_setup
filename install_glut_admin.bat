@@ -14,8 +14,11 @@ echo.
 
 set "SCRIPT_DIR=%~dp0"
 set "SRC=%SCRIPT_DIR%glut_files"
-set "MINGW=C:\Program Files\CodeBlocks\MinGW"
-set "WIZARD_DEST=C:\Program Files\CodeBlocks\share\CodeBlocks\templates\wizard\glut\wizard.script"
+
+:: Change CODEBLOCKS_DIR below if Code::Blocks is installed on another drive or custom path (e.g. D:\CodeBlocks)
+set "CODEBLOCKS_DIR=C:\Program Files\CodeBlocks"
+set "MINGW=%CODEBLOCKS_DIR%\MinGW"
+set "WIZARD_DEST=%CODEBLOCKS_DIR%\share\CodeBlocks\templates\wizard\glut\wizard.script"
 
 if not exist "%MINGW%\include\GL" mkdir "%MINGW%\include\GL"
 

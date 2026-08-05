@@ -43,21 +43,35 @@ To automatically install all headers, 64-bit library files, DLLs, and the update
 
 ---
 
-## 4. How to Create & Run a GLUT Project in Code::Blocks
+## 4. Custom Installation Paths / Different Drive (e.g. `D:\` Drive)
+
+If your Code::Blocks or MinGW installation is located on another drive or custom directory (such as `D:\CodeBlocks` or `D:\Program Files\CodeBlocks`):
+
+1. Open `install_glut_admin.bat` in any text editor (such as Notepad or VS Code).
+2. Modify line 17 to set `CODEBLOCKS_DIR` to your actual Code::Blocks installation folder:
+   ```cmd
+   :: Change CODEBLOCKS_DIR below if Code::Blocks is installed on another drive or custom path
+   set "CODEBLOCKS_DIR=D:\CodeBlocks"
+   ```
+3. Save the file.
+4. Right-click `install_glut_admin.bat` and select **Run as administrator**.
+
+> **Note:** Updating `CODEBLOCKS_DIR` automatically configures both the MinGW library target (`%CODEBLOCKS_DIR%\MinGW`) and the wizard template script destination (`%CODEBLOCKS_DIR%\share\CodeBlocks\templates\wizard\glut\wizard.script`).
+
+---
+
+## 5. How to Create & Run a GLUT Project in Code::Blocks
 
 1. Open **Code::Blocks**.
 2. Go to **File > New > Project...** -> Select **GLUT project** -> Click **Next**.
 3. Enter your **Project Title** (e.g. `Lab_01_Shapes`) and choose your working folder.
-4. When asked for the **GLUT location**, enter:
-   ```text
-   C:\Program Files\CodeBlocks\MinGW
-   ```
+4. When asked for the **GLUT location**, enter your Code::Blocks MinGW folder (e.g. `C:\Program Files\CodeBlocks\MinGW` or `D:\CodeBlocks\MinGW`).
 5. Click **Next** -> Select **GNU GCC Compiler** -> Click **Finish**.
 6. Open `main.cpp` and press **`F9`** (or click **Build and Run**).
 
 ---
 
-## 5. Reference Files Included in Package
+## 6. Reference Files Included in Package
 
 All reference files are stored inside the `glut_files` directory:
 * **`glut.h`**: OpenGL GLUT C/C++ header file.

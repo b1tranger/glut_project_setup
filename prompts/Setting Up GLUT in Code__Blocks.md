@@ -521,3 +521,108 @@ Each package directory contains:
 3. **Wizard Condition Bug (Clicking "Next" does nothing)**:
    * **Cause**: Line 61 of Code::Blocks `wizard.script` had an invalid `||` boolean expression where `SilentVerifyLibFile` returning `true` caused `OnLeave_GlutPath` to return `false`.
    * **Fix**: Updated `wizard.script` to evaluate library names using non-blocking `&&` checks.
+
+### User Input
+
+does @[c:\Users\...\Documents\GitHub\[personal]\glut_project\glut_project_setup\install_glut_admin.bat] use the files from this repository?
+
+*Edited relevant file*
+
+*Edited relevant file*
+
+*Edited relevant file*
+
+*Edited relevant file*
+
+*Edited relevant file*
+
+*Edited relevant file*
+
+*Edited relevant file*
+
+*Edited relevant file*
+
+*Edited relevant file*
+
+*Edited relevant file*
+
+*Edited relevant file*
+
+*Edited relevant file*
+
+*Edited relevant file*
+
+*Edited relevant file*
+
+*Edited relevant file*
+
+*Viewed [install_glut_admin.bat](file:///c:/Users/.../Documents/GitHub/%5Bpersonal%5D/glut_project/glut_project_setup/install_glut_admin.bat) *
+
+*Listed directory [glut_project_setup](file:///C:/Users/.../Documents/GitHub/%5Bpersonal%5D/glut_project/glut_project_setup) *
+
+### Planner Response
+
+**Yes, absolutely.**
+
+In [`install_glut_admin.bat`](file:///c:/Users/.../Documents/GitHub/%5Bpersonal%5D/glut_project/glut_project_setup/install_glut_admin.bat#L15-L16), lines 15 and 16 are defined as:
+
+```cmd
+set "SCRIPT_DIR=%~dp0"
+set "SRC=%SCRIPT_DIR%glut_files"
+```
+
+### How this works:
+* `%~dp0` is a built-in Windows batch variable that automatically expands to **the folder where the script is currently located** (`glut_project_setup\`).
+* `%SCRIPT_DIR%glut_files` points directly to the [`glut_files/`](file:///c:/Users/.../Documents/GitHub/%5Bpersonal%5D/glut_project/glut_project_setup/glut_files) folder **inside your repository**.
+
+Because it uses relative paths (`%~dp0`), the script is completely self-contained and will always use the files inside the repository, regardless of where the repository is located or moved on your computer.
+
+### User Input
+
+update the guide @[c:\Users\...\Documents\GitHub\[personal]\glut_project\glut_project_setup\guide.md] so if the codeblocks installation (or MinGW) is in another drive instead of C they can changes @[c:\Users\...\Documents\GitHub\[personal]\glut_project\glut_project_setup\install_glut_admin.bat:L17-L18]  accordingly so it works.
+
+*Viewed [install_glut_admin.bat](file:///c:/Users/.../Documents/GitHub/%5Bpersonal%5D/glut_project/glut_project_setup/install_glut_admin.bat) *
+
+*Viewed [guide.md](file:///C:/Users/.../Documents/GitHub/%5Bpersonal%5D/glut_project/glut_project_setup/guide.md) *
+
+*Edited relevant file*
+
+*Edited relevant file*
+
+*Edited relevant file*
+
+*Edited relevant file*
+
+### Planner Response
+
+The [`guide.md`](file:///c:/Users/.../Documents/GitHub/%5Bpersonal%5D/glut_project/glut_project_setup/guide.md) and [`install_glut_admin.bat`](file:///c:/Users/.../Documents/GitHub/%5Bpersonal%5D/glut_project/glut_project_setup/install_glut_admin.bat#L17-L19) files have been updated across all setup locations to support custom drives (like `D:\` or `E:\`) and custom Code::Blocks installation directories!
+
+---
+
+### What Was Updated
+
+#### 1. In [`install_glut_admin.bat`](file:///c:/Users/.../Documents/GitHub/%5Bpersonal%5D/glut_project/glut_project_setup/install_glut_admin.bat#L17-L19):
+A single configurable root variable `CODEBLOCKS_DIR` was added:
+
+```cmd
+:: Change CODEBLOCKS_DIR below if Code::Blocks is installed on another drive or custom path (e.g. D:\CodeBlocks)
+set "CODEBLOCKS_DIR=C:\Program Files\CodeBlocks"
+set "MINGW=%CODEBLOCKS_DIR%\MinGW"
+set "WIZARD_DEST=%CODEBLOCKS_DIR%\share\CodeBlocks\templates\wizard\glut\wizard.script"
+```
+
+#### 2. In [`guide.md`](file:///c:/Users/.../Documents/GitHub/%5Bpersonal%5D/glut_project/glut_project_setup/guide.md#L44-L58):
+Added a dedicated instructions section:
+
+> ### ⚙️ Custom Installation Paths / Different Drive (e.g. `D:\` Drive)
+>
+> If your Code::Blocks or MinGW installation is located on another drive or custom directory (such as `D:\CodeBlocks` or `D:\Program Files\CodeBlocks`):
+>
+> 1. Open `install_glut_admin.bat` in any text editor (such as Notepad or VS Code).
+> 2. Modify line 17 to set `CODEBLOCKS_DIR` to your actual Code::Blocks installation folder:
+>    ```cmd
+>    set "CODEBLOCKS_DIR=D:\CodeBlocks"
+>    ```
+> 3. Save the file and right-click -> **Run as administrator**.
+>
+> *Note: Changing `CODEBLOCKS_DIR` automatically updates both the MinGW library target (`%CODEBLOCKS_DIR%\MinGW`) and the wizard template script path (`%CODEBLOCKS_DIR%\share\CodeBlocks\templates\wizard\glut\wizard.script`).*
