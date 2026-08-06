@@ -31,6 +31,14 @@ This guide documents the complete setup of OpenGL/GLUT in Code::Blocks on modern
   }
   ```
 
+### 5. `0xc000007b` Application Error (`STATUS_INVALID_IMAGE_FORMAT`)
+* **Problem**: Application crashes immediately on launch with dialog: `The application was unable to start correctly (0xc000007b)`.
+* **Root Cause**: Architecture mismatch at runtime. The 64-bit compiler (`x86_64-w64-mingw32`) produced a 64-bit executable (`lab-1.exe`), but Windows tried to load a 32-bit `glut32.dll` from `%MINGW%\bin` or System32. A 64-bit process cannot load a 32-bit DLL.
+* **Fix**: Run `install_glut_admin.bat` as Administrator. It copies the genuine 64-bit `glut32.dll` and `freeglut.dll` into `%MINGW%\bin`, `%SystemRoot%\System32`, and any local project output folders (`bin\Debug` / `bin\Release`).
+
+
+
+
 ---
 
 ## 3. Quick 1-Click Automated Setup
@@ -40,6 +48,15 @@ To automatically install all headers, 64-bit library files, DLLs, and the update
 1. Right-click `install_glut_admin.bat` and select **Run as administrator**.
 2. Click **Yes** on the Windows Administrator prompt.
 3. Wait for the `SUCCESS!` confirmation message.
+
+### Uninstallation / Cleanup:
+To cleanly remove all installed GLUT files (including previous/legacy setup files) and restore original settings:
+1. Right-click `uninstall_glut_admin.bat` and select **Run as administrator**.
+2. Click **Yes** on the Windows Administrator prompt.
+3. All legacy and current headers, libraries (`.a`), DLLs (from MinGW, System32, SysWOW64, and project output folders), and modified wizard scripts will be completely removed and restored.
+4. You can then run `install_glut_admin.bat` to perform a completely fresh 64-bit installation.
+
+
 
 ---
 

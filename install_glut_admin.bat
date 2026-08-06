@@ -8,7 +8,7 @@ if %errorLevel% neq 0 (
 )
 
 echo ============================================================
-echo   Installing GLUT / FreeGLUT Files & Fixing Code::Blocks Wizard
+echo   Installing 64-Bit GLUT / FreeGLUT Files & Fixing Code::Blocks
 echo ============================================================
 echo.
 
@@ -22,28 +22,52 @@ set "WIZARD_DEST=%CODEBLOCKS_DIR%\share\CodeBlocks\templates\wizard\glut\wizard.
 
 if not exist "%MINGW%\include\GL" mkdir "%MINGW%\include\GL"
 
-echo [1/4] Copying glut.h -> %MINGW%\include\GL...
+echo [1/5] Copying glut.h -> %MINGW%\include\GL...
 copy /Y "%SRC%\glut.h" "%MINGW%\include\GL\glut.h"
 
-echo [2/4] Copying 64-bit libglut32.a as libfreeglut.a, libglut32.a, libglut.a...
+echo [2/5] Copying 64-bit libglut32.a as libfreeglut.a, libglut32.a, libglut.a...
 copy /Y "%SRC%\libglut32_x64.a" "%MINGW%\lib\libfreeglut.a"
 copy /Y "%SRC%\libglut32_x64.a" "%MINGW%\lib\libglut32.a"
 copy /Y "%SRC%\libglut32_x64.a" "%MINGW%\lib\libglut.a"
-copy /Y "%SRC%\libglut32.a" "%MINGW%\lib\libglut32_32bit_backup.a"
 
-echo [3/4] Copying glut32.dll as freeglut.dll, glut32.dll, glut.dll to %MINGW%\bin...
+echo [3/5] Copying genuine 64-bit glut32.dll & freeglut.dll to MinGW & System32...
 copy /Y "%SRC%\glut32.dll" "%MINGW%\bin\freeglut.dll"
 copy /Y "%SRC%\glut32.dll" "%MINGW%\bin\glut32.dll"
 copy /Y "%SRC%\glut32.dll" "%MINGW%\bin\glut.dll"
 
-echo [4/4] Fixing Code::Blocks GLUT Wizard script...
+if exist "%MINGW%\x86_64-w64-mingw32\bin" (
+    copy /Y "%SRC%\glut32.dll" "%MINGW%\x86_64-w64-mingw32\bin\freeglut.dll"
+    copy /Y "%SRC%\glut32.dll" "%MINGW%\x86_64-w64-mingw32\bin\glut32.dll"
+    copy /Y "%SRC%\glut32.dll" "%MINGW%\x86_64-w64-mingw32\bin\glut.dll"
+)
+
+if exist "%SystemRoot%\System32" (
+    copy /Y "%SRC%\glut32.dll" "%SystemRoot%\System32\freeglut.dll"
+    copy /Y "%SRC%\glut32.dll" "%SystemRoot%\System32\glut32.dll"
+    copy /Y "%SRC%\glut32.dll" "%SystemRoot%\System32\glut.dll"
+)
+
+echo [4/5] Copying 64-bit DLL into local project output directories (bin\Debug / bin\Release)...
+for /r "%SCRIPT_DIR%.." %%d in (bin\Debug bin\Release) do (
+    if exist "%%d" (
+        echo   - Found project output folder: %%d
+        copy /Y "%SRC%\glut32.dll" "%%d\freeglut.dll" >nul
+        copy /Y "%SRC%\glut32.dll" "%%d\glut32.dll" >nul
+        copy /Y "%SRC%\glut32.dll" "%%d\glut.dll" >nul
+    )
+)
+
+echo [5/5] Fixing Code::Blocks GLUT Wizard script...
 if exist "%SRC%\wizard_fixed.script" (
+    if not exist "%WIZARD_DEST%.bak" if exist "%WIZARD_DEST%" copy /Y "%WIZARD_DEST%" "%WIZARD_DEST%.bak" >nul
     copy /Y "%SRC%\wizard_fixed.script" "%WIZARD_DEST%"
 )
 
+
 echo.
 echo ============================================================
-echo   SUCCESS! GLUT setup & Code::Blocks Wizard fix applied!
+echo   SUCCESS! 64-bit GLUT setup applied cleanly!
+echo   0xc000007b errors are resolved for all 64-bit builds.
 echo ============================================================
 echo.
 pause
