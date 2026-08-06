@@ -1,7 +1,7 @@
 import shutil
 import os
 
-base = r"c:\Users\gsmur\Documents\GitHub\[personal]\glut_project\glut_project_setup"
+base = os.path.dirname(os.path.abspath(__file__))
 glut = os.path.join(base, "glut_files")
 dll_64 = os.path.join(glut, "mingw64", "bin", "libfreeglut.dll")
 
