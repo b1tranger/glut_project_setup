@@ -36,6 +36,17 @@ This guide documents the complete setup of OpenGL/GLUT in Code::Blocks on modern
 * **Root Cause**: Architecture mismatch at runtime. The 64-bit compiler (`x86_64-w64-mingw32`) produced a 64-bit executable (`lab-1.exe`), but Windows tried to load a 32-bit `glut32.dll` from `%MINGW%\bin` or System32. A 64-bit process cannot load a 32-bit DLL.
 * **Fix**: Run `install_glut_admin.bat` as Administrator. It copies the genuine 64-bit `glut32.dll` and `freeglut.dll` into `%MINGW%\bin`, `%SystemRoot%\System32`, and any local project output folders (`bin\Debug` / `bin\Release`).
 
+### 6. `wxWidgets Debug Alert` (`assert "IsVisible(item)" failed in GetNextVisible()`)
+* **Problem**: When creating a new GLUT project, Code::Blocks shows a dialog: `wxWidgets Debug Alert - assert "IsVisible(item)" failed in GetNextVisible(): The item you call GetNextVisible() for must be visible itself!`.
+* **Root Cause**: An internal GUI debug assertion in Code::Blocks itself. When the wizard completes and automatically inserts the newly created project into the IDE's Management tree panel (`wxTreeCtrl`), Code::Blocks queries the tree item visibility before the panel finishes rendering.
+* **Impact**: **Harmless**. It is purely an IDE interface alert and does **not** affect your project, compiler settings, or C++ source code.
+* **Fix / Workaround**:
+  1. Check **"Don't show this dialog again"** and click **Continue**.
+  2. Ensure the Management view is visible (**View > Management** or press `Shift + F2`).
+  3. If the layout state gets stuck, reset it via **View > Layouts > Standard**.
+
+
+
 
 
 
