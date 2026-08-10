@@ -19,6 +19,7 @@ set "SRC=%SCRIPT_DIR%glut_files"
 set "CODEBLOCKS_DIR=C:\Program Files\CodeBlocks"
 set "MINGW=%CODEBLOCKS_DIR%\MinGW"
 set "WIZARD_DEST=%CODEBLOCKS_DIR%\share\CodeBlocks\templates\wizard\glut\wizard.script"
+set "MAIN_DEST=%CODEBLOCKS_DIR%\share\CodeBlocks\templates\wizard\glut\files\main.cpp"
 
 if not exist "%MINGW%\include\GL" mkdir "%MINGW%\include\GL"
 
@@ -57,10 +58,14 @@ for /r "%SCRIPT_DIR%.." %%d in (bin\Debug bin\Release) do (
     )
 )
 
-echo [5/5] Fixing Code::Blocks GLUT Wizard script...
+echo [5/5] Fixing Code::Blocks GLUT Wizard script & main.cpp template...
 if exist "%SRC%\wizard_fixed.script" (
     if not exist "%WIZARD_DEST%.bak" if exist "%WIZARD_DEST%" copy /Y "%WIZARD_DEST%" "%WIZARD_DEST%.bak" >nul
     copy /Y "%SRC%\wizard_fixed.script" "%WIZARD_DEST%"
+)
+if exist "%SRC%\main.cpp" (
+    if not exist "%MAIN_DEST%.bak" if exist "%MAIN_DEST%" copy /Y "%MAIN_DEST%" "%MAIN_DEST%.bak" >nul
+    copy /Y "%SRC%\main.cpp" "%MAIN_DEST%"
 )
 
 

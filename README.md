@@ -31,7 +31,8 @@ glut_project_setup/
 │   ├── glut.dll               # Generic GLUT dynamic library link
 │   ├── glut32_32bit.dll       # Legacy 32-bit DLL backup
 │   ├── glut32_x64.def         # 64-bit DLL export definition file
-│   └── wizard_fixed.script    # Patched Code::Blocks GLUT wizard script
+│   ├── wizard_fixed.script    # Patched Code::Blocks GLUT wizard script
+│   └── main.cpp               # Fixed GLUT main.cpp project template
 ├── sample_labs/               # Sample OpenGL laboratory assignments & reference documents
 │   ├── Basic 2D Shapes.txt
 │   ├── Catch The Falling Ball.txt

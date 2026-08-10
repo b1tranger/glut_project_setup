@@ -18,6 +18,7 @@ set "SCRIPT_DIR=%~dp0"
 set "CODEBLOCKS_DIR=C:\Program Files\CodeBlocks"
 set "MINGW=%CODEBLOCKS_DIR%\MinGW"
 set "WIZARD_DEST=%CODEBLOCKS_DIR%\share\CodeBlocks\templates\wizard\glut\wizard.script"
+set "MAIN_DEST=%CODEBLOCKS_DIR%\share\CodeBlocks\templates\wizard\glut\files\main.cpp"
 
 echo [1/5] Removing GLUT headers from MinGW target include paths...
 if exist "%MINGW%\include\GL\glut.h" del /F /Q "%MINGW%\include\GL\glut.h"
@@ -72,11 +73,16 @@ for /r "%SCRIPT_DIR%.." %%d in (bin\Debug bin\Release) do (
     )
 )
 
-echo [5/5] Restoring original Code::Blocks GLUT Wizard script...
+echo [5/5] Restoring original Code::Blocks GLUT Wizard script & main.cpp template...
 if exist "%WIZARD_DEST%.bak" (
     copy /Y "%WIZARD_DEST%.bak" "%WIZARD_DEST%" >nul
     del /F /Q "%WIZARD_DEST%.bak"
     echo   - Restored original wizard script from backup.
+)
+if exist "%MAIN_DEST%.bak" (
+    copy /Y "%MAIN_DEST%.bak" "%MAIN_DEST%" >nul
+    del /F /Q "%MAIN_DEST%.bak"
+    echo   - Restored original main.cpp template from backup.
 )
 
 echo.

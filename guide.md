@@ -31,6 +31,12 @@ This guide documents the complete setup of OpenGL/GLUT in Code::Blocks on modern
   }
   ```
 
+### 4. Header Include Order Bug (`_CRTIMP does not name a type`)
+* **Problem**: Building a newly created GLUT project throws compilation errors such as:
+  `corecrt_wstdlib.h|15|error: '_CRTIMP' does not name a type`
+* **Root Cause**: Default Code::Blocks GLUT project template `main.cpp` places `#include <stdlib.h>` *below* `#include <GL/glut.h>`. When `glut.h` runs first on MinGW-w64, it defines and then `#undef`s internal Win32 CRT macros (`_CRTIMP`), causing GCC/MinGW header `#include <stdlib.h>` to fail during parsing.
+* **Fix**: Placed `#include <stdlib.h>` *before* GLUT header includes in the fixed template (`glut_files\main.cpp`). `install_glut_admin.bat` replaces Code::Blocks' default `main.cpp` template (`%CODEBLOCKS_DIR%\share\CodeBlocks\templates\wizard\glut\files\main.cpp`) with this fixed template.
+
 ### 5. `0xc000007b` Application Error (`STATUS_INVALID_IMAGE_FORMAT`)
 * **Problem**: Application crashes immediately on launch with dialog: `The application was unable to start correctly (0xc000007b)`.
 * **Root Cause**: Architecture mismatch at runtime. The 64-bit compiler (`x86_64-w64-mingw32`) produced a 64-bit executable (`lab-1.exe`), but Windows tried to load a 32-bit `glut32.dll` from `%MINGW%\bin` or System32. A 64-bit process cannot load a 32-bit DLL.
@@ -285,3 +291,4 @@ All reference files are stored inside the `glut_files` directory:
 * **`libglut32_x64.a`**: 64-bit MinGW import library.
 * **`glut32.dll`**: GLUT dynamic link library.
 * **`wizard_fixed.script`**: Fixed Code::Blocks GLUT wizard script.
+* **`main.cpp`**: Fixed Code::Blocks GLUT main.cpp template (`#include <stdlib.h>` placed before GLUT header includes).
