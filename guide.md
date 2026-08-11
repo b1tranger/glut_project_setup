@@ -58,39 +58,38 @@ This guide documents the complete setup of OpenGL/GLUT in Code::Blocks on modern
 
 ---
 
-## 3. Quick 1-Click Automated Setup
+## 3. Automated Interactive Setup (32-Bit & 64-Bit)
 
-To automatically install all headers, 64-bit library files, DLLs, and the updated wizard script:
+To install all headers, library files, DLLs, and updated wizard scripts for your target Code::Blocks architecture:
 
 1. Right-click `install_glut_admin.bat` and select **Run as administrator**.
 2. Click **Yes** on the Windows Administrator prompt.
-3. Wait for the `SUCCESS!` confirmation message.
+3. Select your installation configuration from the interactive prompt:
+   - **[1] 32-Bit Code::Blocks (v17+)** at `C:\Program Files\CodeBlocks` (copies pre-packaged 32-bit OpenGL files from `OpenGL\32Bit` to local drive `C:`).
+   - **[2] 64-Bit Code::Blocks (v20+)** at `C:\Program Files (x86)\CodeBlocks` (copies pre-packaged 64-bit OpenGL files from `OpenGL\64Bit` to local drive `C:`).
+   - **[3] 64-Bit Code::Blocks (v20+)** at `C:\Program Files\CodeBlocks`.
+   - **[4] Custom Path / Other Drive** (e.g., `D:\CodeBlocks` or `E:\Program Files\CodeBlocks`).
+   - **[5] Auto-Detected** (if a standard Code::Blocks installation was detected automatically).
+4. Wait for the `SUCCESS!` confirmation message.
 
 ### Uninstallation / Cleanup:
 To cleanly remove all installed GLUT files (including previous/legacy setup files) and restore original settings:
 1. Right-click `uninstall_glut_admin.bat` and select **Run as administrator**.
-2. Click **Yes** on the Windows Administrator prompt.
-3. All legacy and current headers, libraries (`.a`), DLLs (from MinGW, System32, SysWOW64, and project output folders), and modified wizard scripts will be completely removed and restored.
-4. You can then run `install_glut_admin.bat` to perform a completely fresh 64-bit installation.
-
-
+2. Select your installed Code::Blocks folder or clean all standard locations.
+3. All headers, libraries (`.a`), DLLs (from MinGW, System32, SysWOW64, and project output folders), and modified wizard scripts will be completely removed and restored to defaults.
 
 ---
 
-## 4. Custom Installation Paths / Different Drive (e.g. `D:\` Drive)
+## 4. Custom Installation Paths / Different Drives (e.g. `D:\` Drive)
 
-If your Code::Blocks or MinGW installation is located on another drive or custom directory (such as `D:\CodeBlocks` or `D:\Program Files\CodeBlocks`):
+If Code::Blocks is installed on another drive or a custom folder (such as `D:\CodeBlocks` or `E:\Program Files\CodeBlocks`):
 
-1. Open `install_glut_admin.bat` in any text editor (such as Notepad or VS Code).
-2. Modify line 17 to set `CODEBLOCKS_DIR` to your actual Code::Blocks installation folder:
-   ```cmd
-   :: Change CODEBLOCKS_DIR below if Code::Blocks is installed on another drive or custom path
-   set "CODEBLOCKS_DIR=D:\CodeBlocks"
-   ```
-3. Save the file.
-4. Right-click `install_glut_admin.bat` and select **Run as administrator**.
+1. Right-click `install_glut_admin.bat` and select **Run as administrator**.
+2. Select Option **`[4] Custom Path / Other Drive`**.
+3. When prompted, enter the full path to your Code::Blocks directory (for example: `D:\CodeBlocks`).
+4. Select the architecture version when prompted (`1` for 32-bit / v17+ or `2` for 64-bit / v20+).
+5. The installer script will automatically configure `%CODEBLOCKS_DIR%\MinGW`, System DLLs, and wizard template scripts for that location without requiring manual file edits.
 
-> **Note:** Updating `CODEBLOCKS_DIR` automatically configures both the MinGW library target (`%CODEBLOCKS_DIR%\MinGW`) and the wizard template script destination (`%CODEBLOCKS_DIR%\share\CodeBlocks\templates\wizard\glut\wizard.script`).
 
 ---
 
