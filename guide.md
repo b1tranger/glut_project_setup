@@ -58,7 +58,7 @@ This guide documents the complete setup of OpenGL/GLUT in Code::Blocks on modern
 
 ---
 
-## 3. Automated Interactive Setup (32-Bit & 64-Bit)
+## <mark>3. Automated Interactive Setup (32-Bit & 64-Bit)</mark>
 
 To install all headers, library files, DLLs, and updated wizard scripts for your target Code::Blocks architecture:
 
