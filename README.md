@@ -12,6 +12,24 @@ An automated setup package and comprehensive technical guide for configuring Ope
 
 ---
 
+## ⚡ Quick Start (Automated Setup)
+
+1. Right-click **`install_glut_admin.bat`** and select **Run as Administrator**.
+2. Confirm the Windows UAC prompt.
+3. Select your installation configuration from the interactive menu:
+   - **`[1]` 32-Bit Code::Blocks (v17+)** (`C:\Program Files\CodeBlocks`)
+   - **`[2]` 64-Bit Code::Blocks (v20+)** (`C:\Program Files (x86)\CodeBlocks`)
+   - **`[3]` 64-Bit Code::Blocks (v20+)** (`C:\Program Files\CodeBlocks`)
+   - **`[4]` Custom Path / Other Drive** (e.g., `D:\CodeBlocks` or `E:\Program Files\CodeBlocks`)
+   - **`[5]` Auto-Detected** (if automatically detected)
+4. Once installation completes, open **Code::Blocks** and create a new **GLUT project**.
+5. Set your GLUT location path to your MinGW directory (e.g., `C:\Program Files\CodeBlocks\MinGW` or `D:\CodeBlocks\MinGW`).
+6. Build and run (`F9`) your project!
+
+To undo changes or perform a clean reinstall, right-click **`uninstall_glut_admin.bat`** and select **Run as Administrator**.
+
+---
+
 ## ✨ Features & What's New
 
 - ⚡ **Dual Architecture Support**: Seamlessly supports both **32-Bit (Code::Blocks v17+)** and **64-Bit (Code::Blocks v20+)** setups.
@@ -71,23 +89,6 @@ glut_project_setup/
 
 ---
 
-## ⚡ Quick Start (Automated Setup)
-
-1. Right-click **`install_glut_admin.bat`** and select **Run as Administrator**.
-2. Confirm the Windows UAC prompt.
-3. Select your installation configuration from the interactive menu:
-   - **`[1]` 32-Bit Code::Blocks (v17+)** (`C:\Program Files\CodeBlocks`)
-   - **`[2]` 64-Bit Code::Blocks (v20+)** (`C:\Program Files (x86)\CodeBlocks`)
-   - **`[3]` 64-Bit Code::Blocks (v20+)** (`C:\Program Files\CodeBlocks`)
-   - **`[4]` Custom Path / Other Drive** (e.g., `D:\CodeBlocks` or `E:\Program Files\CodeBlocks`)
-   - **`[5]` Auto-Detected** (if automatically detected)
-4. Once installation completes, open **Code::Blocks** and create a new **GLUT project**.
-5. Set your GLUT location path to your MinGW directory (e.g., `C:\Program Files\CodeBlocks\MinGW` or `D:\CodeBlocks\MinGW`).
-6. Build and run (`F9`) your project!
-
-To undo changes or perform a clean reinstall, right-click **`uninstall_glut_admin.bat`** and select **Run as Administrator**.
-
----
 
 👉 For detailed manual setup instructions, technical root causes, and sample code, see **[guide.md](guide.md)**.
 
