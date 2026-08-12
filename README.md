@@ -9,9 +9,6 @@ An automated setup package and comprehensive technical guide for configuring Ope
 > For in-depth explanations of root causes, header include fixes, custom drive setups, manual installation steps, and troubleshooting:  
 > 👉 **[Read the complete technical guide in guide.md](guide.md)**
 
----
-
-<img width="1112" height="432" alt="Code::Blocks GLUT Setup Demonstration" src="https://github.com/user-attachments/assets/dd90124e-385d-4079-9656-b7b53ee164e0" />
 
 ---
 
